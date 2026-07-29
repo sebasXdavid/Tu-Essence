@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+.DS_Store
+*.log
+*.lnk
+.node/
+.node-v24.18.0.zip
