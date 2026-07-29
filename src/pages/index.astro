@@ -1,0 +1,284 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { perfumes } from "../data/perfumes";
+
+const whatsappBase = "https://wa.me/12039087955";
+const instagramProfile = "https://www.instagram.com/tuesencia_usa/";
+const instagramMessage = "https://ig.me/m/tuesencia_usa";
+const contactMessage = encodeURIComponent(
+  "Hola Tu Essence, quisiera información sobre los perfumes disponibles.",
+);
+const categoryCounts = {
+  todos: perfumes.length,
+  hombre: perfumes.filter((perfume) => perfume.categoria === "hombre").length,
+  mujer: perfumes.filter((perfume) => perfume.categoria === "mujer").length,
+  unisex: perfumes.filter((perfume) => perfume.categoria === "unisex").length,
+};
+
+const whatsappProductUrl = (nombre: string, precio: string) => {
+  const message =
+    precio === "$?"
+      ? `Hola Tu Essence, me interesa ${nombre}. ¿Cuál es el precio especial de lanzamiento y está disponible?`
+      : `Hola Tu Essence, me interesa ${nombre} por ${precio}. ¿Está disponible?`;
+  return `${whatsappBase}?text=${encodeURIComponent(message)}`;
+};
+---
+
+<Layout
+  title="Tu Essence | Perfumes en Connecticut"
+  description="Explora el catálogo local de perfumes de Tu Essence en Connecticut y consulta disponibilidad directamente por WhatsApp o Instagram."
+>
+  <a class="skip-link" href="#catalogo">Saltar al catálogo</a>
+
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Tu Essence, volver al inicio">
+        <span class="brand-mark" aria-hidden="true">TE</span>
+        <span>Tu Essence</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img
+        class="hero-image"
+        src="/images/hero-bg.png"
+        alt=""
+        width="1400"
+        height="2087"
+        fetchpriority="high"
+      />
+      <div class="hero-wash" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="eyebrow">Catálogo local · Connecticut</p>
+        <h1 id="hero-title">Tu Essence</h1>
+        <p class="hero-lead">Encuentra tu próxima fragancia y consulta disponibilidad en una conversación directa.</p>
+        <div class="button-row">
+          <a class="button button-primary" href="#catalogo">Ver Catálogo</a>
+          <a
+            class="button button-secondary"
+            href={`${whatsappBase}?text=${contactMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" aria-labelledby="benefits-title">
+      <div class="container">
+        <h2 class="sr-only" id="benefits-title">Beneficios de comprar con Tu Essence</h2>
+        <ul class="benefit-list" role="list">
+          <li>
+            <span class="benefit-number" aria-hidden="true">01</span>
+            <div><strong>Atención local</strong><span>Para clientes de Connecticut.</span></div>
+          </li>
+          <li>
+            <span class="benefit-number" aria-hidden="true">02</span>
+            <div><strong>Respuesta directa</strong><span>Conversa por WhatsApp o Instagram.</span></div>
+          </li>
+          <li>
+            <span class="benefit-number" aria-hidden="true">03</span>
+            <div><strong>Compra sencilla</strong><span>Elige una fragancia y envía tu consulta.</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="catalog-section" id="catalogo" aria-labelledby="catalog-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">{perfumes.length} opciones para explorar</p>
+            <h2 id="catalog-title">Catálogo</h2>
+          </div>
+          <p>Selecciona una categoría y consulta cada perfume directamente por WhatsApp.</p>
+        </div>
+
+        <div class="catalog-toolbar" aria-label="Filtrar catálogo">
+          <div class="filters" role="group" aria-label="Categoría de perfume">
+            <button class="filter-button is-active" type="button" data-filter="todos" aria-pressed="true">
+              Todos <span>{categoryCounts.todos}</span>
+            </button>
+            <button class="filter-button" type="button" data-filter="hombre" aria-pressed="false">
+              Hombre <span>{categoryCounts.hombre}</span>
+            </button>
+            <button class="filter-button" type="button" data-filter="mujer" aria-pressed="false">
+              Mujer <span>{categoryCounts.mujer}</span>
+            </button>
+            <button class="filter-button" type="button" data-filter="unisex" aria-pressed="false">
+              Unisex <span>{categoryCounts.unisex}</span>
+            </button>
+          </div>
+          <p class="result-count" aria-live="polite"><span id="visible-count">{perfumes.length}</span> perfumes</p>
+        </div>
+
+        <div class="catalog-grid">
+          {
+            perfumes.map((perfume) => (
+              <article class="product-card" data-category={perfume.categoria}>
+                <div class="product-image-wrap">
+                  <img
+                    class="product-image"
+                    src={perfume.imagen}
+                    alt={`Imagen de ${perfume.nombre}`}
+                    width="640"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {perfume.etiqueta && <span class="product-special">{perfume.etiqueta}</span>}
+                  <span class="availability">
+                    {perfume.disponible ? "Consultar disponibilidad" : "No disponible"}
+                  </span>
+                </div>
+                <div class="product-body">
+                  <span class="category-label">{perfume.categoria}</span>
+                  <h3>{perfume.nombre}</h3>
+                  <p class="product-copy">{perfume.frase}</p>
+                  <div class="product-footer">
+                    <strong class="price">{perfume.precio}</strong>
+                    <a
+                      class="button button-product"
+                      href={whatsappProductUrl(perfume.nombre, perfume.precio)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Consultar ${perfume.nombre} por WhatsApp`}
+                    >
+                      Consultar
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+        <p class="example-notice">
+          Precios del catálogo. Consulta la disponibilidad directamente con Tu Essence.
+        </p>
+      </div>
+    </section>
+
+    <section class="order-section" aria-labelledby="order-title">
+      <div class="container order-layout">
+        <div>
+          <p class="eyebrow">Comprar es simple</p>
+          <h2 id="order-title">Tu pedido empieza con un mensaje</h2>
+        </div>
+        <ol class="steps">
+          <li><span>1</span><p><strong>Explora</strong>Elige el perfume que te interesa.</p></li>
+          <li><span>2</span><p><strong>Consulta</strong>Usa el botón de la ficha para enviar los detalles.</p></li>
+          <li><span>3</span><p><strong>Conversa</strong>Continúa directamente por WhatsApp o Instagram.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2 id="contact-title">Hablemos de tu próxima fragancia</h2>
+          <p>Escríbenos por el canal que prefieras para consultar el catálogo y la disponibilidad.</p>
+        </div>
+        <div class="contact-actions">
+          <a
+            class="contact-link contact-whatsapp"
+            href={`${whatsappBase}?text=${contactMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>WhatsApp Business</span>
+            <strong>+1 203 908 7955</strong>
+          </a>
+          <a
+            class="contact-link"
+            href={instagramMessage}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Mensaje directo</span>
+            <strong>@tuesencia_usa</strong>
+          </a>
+          <a
+            class="profile-link"
+            href={instagramProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir perfil de Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>Tu Essence</strong><span>Connecticut</span></div>
+      <div class="footer-links">
+        <a href={`${whatsappBase}?text=${contactMessage}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href={instagramProfile} target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+      <p>© {new Date().getFullYear()} Tu Essence</p>
+    </div>
+  </footer>
+
+  <a
+    class="floating-whatsapp"
+    href={`${whatsappBase}?text=${contactMessage}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar a Tu Essence por WhatsApp"
+  >
+    <span aria-hidden="true">WA</span>
+    WhatsApp
+  </a>
+
+  <script>
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-button");
+    const productCards = document.querySelectorAll<HTMLElement>(".product-card");
+    const productImages = document.querySelectorAll<HTMLImageElement>(".product-image");
+    const visibleCount = document.querySelector<HTMLElement>("#visible-count");
+    const fallbackImage = "/images/placeholder-perfume.svg";
+
+    const showImageFallback = (image: HTMLImageElement) => {
+      if (image.src.endsWith(fallbackImage)) return;
+      image.src = fallbackImage;
+      image.classList.add("is-placeholder");
+    };
+
+    productImages.forEach((image) => {
+      image.addEventListener("error", () => showImageFallback(image), { once: true });
+      if (image.complete && image.naturalWidth === 0) showImageFallback(image);
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        let count = 0;
+
+        filterButtons.forEach((item) => {
+          const isActive = item === button;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        productCards.forEach((card) => {
+          const isVisible = filter === "todos" || card.dataset.category === filter;
+          card.hidden = !isVisible;
+          if (isVisible) count += 1;
+        });
+
+        if (visibleCount) visibleCount.textContent = String(count);
+      });
+    });
+  </script>
+</Layout>
