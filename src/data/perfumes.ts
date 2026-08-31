@@ -51,11 +51,11 @@ export const perfumes: Perfume[] = [
   },
   {
     id: "glaier-gold",
-    nombre: "GLAIER GOLD",
+    nombre: "GLACIER GOLD",
     precio: "$29",
     categoria: "hombre",
     frase: "Dorado, ambarado y especiado; una estela opulenta de pura seducción.",
-    imagen: "/images/perfumes/GLAIER GOLD.jpeg",
+    imagen: "/images/perfumes/GLACIER GOLD.png",
     disponible: true,
   },
   {
