@@ -34,7 +34,7 @@ export const perfumes: Perfume[] = [
   {
     id: "azzaro-by-night",
     nombre: "AZZARO BY NIGHT",
-    precio: "$99",
+    precio: "$89",
     categoria: "hombre",
     frase: "Cítrico oscuro y especiado, creado para dominar la noche.",
     imagen: "/images/perfumes/AZZARO BY NIGHT.png",
@@ -43,7 +43,7 @@ export const perfumes: Perfume[] = [
   {
     id: "azzaro-the-most-wanted",
     nombre: "AZZARO THE MOST WANTED",
-    precio: "$99",
+    precio: "$89",
     categoria: "hombre",
     frase: "Intenso, cálido y adictivo: magnetismo nocturno sin reservas.",
     imagen: "/images/perfumes/AZZARO THE MOST WANTED.png",
@@ -61,7 +61,7 @@ export const perfumes: Perfume[] = [
   {
     id: "hawas-ice",
     nombre: "HAWAS ICE",
-    precio: "$59",
+    precio: "$55",
     categoria: "hombre",
     frase: "Frescura glacial y cítrica con una energía limpia, vibrante e inmediata.",
     imagen: "/images/perfumes/HAWAS ICE.png",
@@ -126,7 +126,7 @@ export const perfumes: Perfume[] = [
     nombre: "MALEKA",
     precio: "$55",
     categoria: "mujer",
-    frase: "Frutal exótico, jugoso y vibrante; una corona de energía femenina.",
+    frase: "Frutal exótico, vibrante; una corona de energía femenina.",
     imagen: "/images/perfumes/MALEKA.png",
     disponible: true,
   },
@@ -138,7 +138,7 @@ export const perfumes: Perfume[] = [
     frase: "Cítrico, floral y especiado; un destello dorado de elegancia oriental.",
     imagen: "/images/perfumes/MURJAN W.png",
     disponible: true,
-    etiqueta: "Sorpresa de lanzamiento · Precio especial",
+    etiqueta: "Sorpresa de lanzamiento",
   },
   {
     id: "nitro-red",
@@ -152,7 +152,7 @@ export const perfumes: Perfume[] = [
   {
     id: "nitro-white",
     nombre: "NITRO WHITE",
-    precio: "$39",
+    precio: "$45",
     categoria: "hombre",
     frase: "Limpio, intenso y amaderado; contraste frío con un fondo cálido.",
     imagen: "/images/perfumes/NITRO WHITE.png",
