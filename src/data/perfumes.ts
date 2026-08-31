@@ -364,6 +364,7 @@ export const perfumes: Perfume[] = [
   frase: "Femenino, delicado y sofisticado.",
   imagen: "/images/perfumes/GOOD GIRL BLUSH.png",
   disponible: true,
+  etiqueta: "DISPONIBLE PARA RESERVA"
 },
 {
   id: "bad-boy-cobalt-absolute",
@@ -373,5 +374,6 @@ export const perfumes: Perfume[] = [
   frase: "Intenso, moderno y con carácter.",
   imagen: "/images/perfumes/Bad Boy Cobalt Absolute.png",
   disponible: true,
+  etiqueta: "DISPONIBLE PARA RESERVA"
 },
 ];
